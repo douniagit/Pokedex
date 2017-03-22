@@ -1,0 +1,11 @@
+module.exports={
+	name:String,
+	description:String,
+	lien:String,
+	images:String,
+	langues:[String],
+	niveau:[String],
+	age:[Number],
+	format:[String],
+	keywords:[String],
+}

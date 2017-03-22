@@ -7,7 +7,8 @@ class PokeApi extends React.Component {
 	    super(props);
 	    this.state = {
           name:[],
-          evolution:[]
+          evolutionP:[],
+          evolutionN:[]
 	    }
 	   this.callingApi();
      //this.evolutionApi();
@@ -19,7 +20,9 @@ class PokeApi extends React.Component {
      //console.log(JSON.parse(data.text));
       const pokeInfo=JSON.parse(data.text);
         this.setState({name:pokeInfo.pokemon});
-      //console.log(this.state.name);
+        //this.setState({evolutionP:pokeInfo.pokemon.prev_evolution});
+       // this.setState({evolutionN:pokeInfo.pokemon.next_evolution});
+      //console.log(this.state.evolutionN);
      });
   }
 
@@ -40,28 +43,20 @@ class PokeApi extends React.Component {
 	  	//console.log(info);
           return (<div key={i}>
             <img src={info.img}alt="pok"/>
-            pokemon = {info.name}
-            prevEvo = {info.prev_evolution.map(select(info,i)=>{
-              return(<div{select.name}/>)
-            })}
-            nextEvo = {info.next_evolution.map(select(info,i)=>{
-              return(<div{select.name}}
-            </div>)
-          });
-
-
-      // const getInfo = this.state.evolution;
-      // const referencement = getInfo.map((info, i) =>{
-      // console.log(info);
-      //     return (<div key={i}>
-      //       pokemon = {info.species} <br/>
-      //       </div>)
-      //     });
-
+            {info.name}
+             prevEvo = {this.state.evolutionP.map((select, i) =>{
+              console.log(select);
+               return(<div>{select.name}</div>)
+             })};
+            nextEvo = {this.state.evolutionN.map((select1, i) =>{
+              return(<div>{select1.name}</div>)
+            })} 
+          </div>)
+        });
 
     return (
-      <div>
-          {referencement}
+        <div>
+         {referencement}
         </div>
 
     );

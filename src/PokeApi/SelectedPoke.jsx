@@ -6,9 +6,6 @@ class SelectedPoke.jsx extends React.Component {
 	constructor(props) {
 	    super(props);
 	    this.state = {
-          pokemon:[],
-          power:[],
-          evolution:[],
           chosenOne:""  //${this.state.metroLine}
 	    }
 	   this.callingApi();
@@ -16,15 +13,13 @@ class SelectedPoke.jsx extends React.Component {
 
 	callingApi(){
     const url=`http://pokeapi.co/api/v2/${this.state.chosenOne}/`;
-    Request.get(url).then((data)=>{
-		 //console.log(JSON.parse(data.text));
-			const pokeInfo=JSON.parse(data.text);
-       // this.setState({stations:this.state.stations.concat([pokeInfo.response.informations.station])});
-       // this.setState({line:this.state.line.concat([pokeInfo.response.informations])});
-        this.setState({time:pokeInfo.response.schedules});
-		 //	console.log(this.state.stations);
-		 });
-	}
+     Request.get(url).then((data)=>{
+     //console.log(JSON.parse(data.text));
+      const pokeInfo=JSON.parse(data.text);
+        this.setState({name:pokeInfo.results});
+      //console.log(this.state.name);
+     });
+  }
 
   handleChange(key, event ) {
     console.log(key)

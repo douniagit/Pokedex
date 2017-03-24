@@ -7,8 +7,11 @@ class PokeApi extends React.Component {
 	constructor(props) {
 	    super(props);
 	    this.state = {
-          name:[]
+          name:[],
+          currentPage: 1,
+          toDoPerPage:20
 	    }
+      this.handleClick = this.handleClick.bind(this);
 	   this.callingApi();
      //this.evolutionApi();
 	  }
@@ -33,9 +36,17 @@ class PokeApi extends React.Component {
 	// 	 });
 	// }
   
-  render() {
 
-	  	const getInfo = this.state.name;
+  handleClick(event){
+    this.setState({
+      currentPage: Number(event.target.id)
+    });
+  }
+
+  render() {
+      const nbOnLastPage=this.state.currentPage*this.state.toDoPerPage;
+	  	const nbOnFirstPage=nbOnLastPage - this.state.toDoPerPage;
+      const getInfo = this.state.name.slice(nbOnFirstPage,nbOnLastPage);
 	  	const referencement = getInfo.map((info, i) =>{
 	  	//console.log(info);
           return (<div className='x' key={i}>
@@ -51,6 +62,24 @@ class PokeApi extends React.Component {
           </div>)
         });
 
+        // Logic for displaying page numbers
+      const pageNumbers = [];
+      for (let i = 1; i <= Math.ceil(this.state.name.length / (this.state.toDoPerPage)); i++) {
+        pageNumbers.push(i);
+      }
+
+      const renderPageNumbers = pageNumbers.map(number => {
+        return (
+          <li
+            key={number}
+            id={number}
+            onClick={this.handleClick}
+          >
+            {number}
+          </li>
+        );
+      });
+
     return (
         <div className='container'>
           <div className="header">
@@ -60,6 +89,9 @@ class PokeApi extends React.Component {
             <div className="pokemon">
               {referencement}
             </div>
+            <ul id="page-numbers">
+              {renderPageNumbers}
+            </ul>
           </div>
           <div className="footer">
           </div>

@@ -1,14 +1,13 @@
 import React from 'react';
 import Request from "superagent";
+import './pok.css';
 
 class PokeApi extends React.Component {
 
 	constructor(props) {
 	    super(props);
 	    this.state = {
-          name:[],
-          evolutionP:[],
-          evolutionN:[]
+          name:[]
 	    }
 	   this.callingApi();
      //this.evolutionApi();
@@ -19,10 +18,8 @@ class PokeApi extends React.Component {
     Request.get(url).then((data)=>{
      //console.log(JSON.parse(data.text));
       const pokeInfo=JSON.parse(data.text);
-        this.setState({name:pokeInfo.pokemon});
-        //this.setState({evolutionP:pokeInfo.pokemon.prev_evolution});
-       // this.setState({evolutionN:pokeInfo.pokemon.next_evolution});
-      //console.log(this.state.evolutionN);
+      this.setState({name:pokeInfo.pokemon});
+      console.log(this.state.name);
      });
   }
 
@@ -41,22 +38,31 @@ class PokeApi extends React.Component {
 	  	const getInfo = this.state.name;
 	  	const referencement = getInfo.map((info, i) =>{
 	  	//console.log(info);
-          return (<div key={i}>
-            <img src={info.img}alt="pok"/>
+          return (<div className='x' key={i}>
+            <img src={info.img} alt="pok"/>
             {info.name}
-             prevEvo = {this.state.evolutionP.map((select, i) =>{
-              console.log(select);
-               return(<div>{select.name}</div>)
-             })};
-            nextEvo = {this.state.evolutionN.map((select1, i) =>{
-              return(<div>{select1.name}</div>)
-            })} 
+            <br/>
+            Number = {info.num}
+            <br/>
+            Type = {info.type+''}
+           {/* {info.next_evolution.map((select, i) =>{
+              return(<p key={i}>{select.name}</p>)
+            })}*/}
           </div>)
         });
 
     return (
-        <div>
-         {referencement}
+        <div className='container'>
+          <div className="header">
+          </div>
+          <div className="grid">
+          <input type="text" placeholder="look for your favorite pokemon..."/>
+            <div className="pokemon">
+              {referencement}
+            </div>
+          </div>
+          <div className="footer">
+          </div>
         </div>
 
     );

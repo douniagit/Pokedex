@@ -1,5 +1,6 @@
 import React from 'react';
 import Request from "superagent";
+import Input from '../Input/Input.jsx';
 import './pok.css';
 
 class PokeApi extends React.Component {
@@ -12,8 +13,7 @@ class PokeApi extends React.Component {
           toDoPerPage:20
 	    }
       this.handleClick = this.handleClick.bind(this);
-	   this.callingApi();
-     //this.evolutionApi();
+      this.callingApi();
 	  }
 
   callingApi(){
@@ -26,16 +26,6 @@ class PokeApi extends React.Component {
      });
   }
 
-	// callingApi(){
- //    const url=`http://pokeapi.co/api/v2/pokemon/?limit=720`;
- //    Request.get(url).then((data)=>{
-	// 	 //console.log(JSON.parse(data.text));
-	// 		const pokeInfo=JSON.parse(data.text);
- //        this.setState({name:pokeInfo.results});
-	// 	 	//console.log(this.state.name);
-	// 	 });
-	// }
-  
 
   handleClick(event){
     this.setState({
@@ -44,10 +34,12 @@ class PokeApi extends React.Component {
   }
 
   render() {
+
       const nbOnLastPage=this.state.currentPage*this.state.toDoPerPage;
 	  	const nbOnFirstPage=nbOnLastPage - this.state.toDoPerPage;
       const getInfo = this.state.name.slice(nbOnFirstPage,nbOnLastPage);
-	  	const referencement = getInfo.map((info, i) =>{
+	  	
+      const referencement = getInfo.map((info, i) =>{
 	  	//console.log(info);
           return (<div className='x' key={i}>
             <img src={info.img} alt="pok"/>
@@ -59,6 +51,7 @@ class PokeApi extends React.Component {
            {/* {info.next_evolution.map((select, i) =>{
               return(<p key={i}>{select.name}</p>)
             })}*/}
+            <br/>
           </div>)
         });
 
@@ -85,7 +78,7 @@ class PokeApi extends React.Component {
           <div className="header">
           </div>
           <div className="grid">
-          <input type="text" placeholder="look for your favorite pokemon..."/>
+          <Input/>
             <div className="pokemon">
               {referencement}
             </div>

@@ -1,6 +1,5 @@
 'use strict';
 const mongoose = require('mongoose');
-const users=require('./models/users');
 const ressources=require('./models/ressources');
 
 mongoose.Promise = global.Promise;
@@ -25,9 +24,7 @@ process.on('SIGINT', function() {
 });
 
 const db = {
-	users:mongoose.model('Users', users),
 	ressources:mongoose.model('Ressources', ressources)
 }
 
-// db.users db.ressources
 module.exports=db;

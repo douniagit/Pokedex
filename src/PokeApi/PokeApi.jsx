@@ -9,8 +9,8 @@ class PokeApi extends React.Component {
 	    super(props);
 	    this.state = {
           name:[],
-          currentPage: 1,
-          toDoPerPage:20
+          pageActuelle: 1,
+          nbPerPage:20
 	    }
       this.handleClick = this.handleClick.bind(this);
       this.callingApi();
@@ -29,14 +29,14 @@ class PokeApi extends React.Component {
 
   handleClick(event){
     this.setState({
-      currentPage: Number(event.target.id)
+      pageActuelle: Number(event.target.id)
     });
   }
 
   render() {
 
-      const nbOnLastPage=this.state.currentPage*this.state.toDoPerPage;
-	  	const nbOnFirstPage=nbOnLastPage - this.state.toDoPerPage;
+      const nbOnLastPage= this.state.pageActuelle*this.state.nbPerPage;
+	  	const nbOnFirstPage= nbOnLastPage - this.state.nbPerPage;
       const getInfo = this.state.name.slice(nbOnFirstPage,nbOnLastPage);
 	  	
       const referencement = getInfo.map((info, i) =>{
@@ -55,9 +55,9 @@ class PokeApi extends React.Component {
           </div>)
         });
 
-        // Logic for displaying page numbers
+        //pour creer le numbre de pages
       const pageNumbers = [];
-      for (let i = 1; i <= Math.ceil(this.state.name.length / (this.state.toDoPerPage)); i++) {
+      for (let i = 1; i <= Math.ceil(this.state.name.length / (this.state.nbPerPage)); i++) {
         pageNumbers.push(i);
       }
 

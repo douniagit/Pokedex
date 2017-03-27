@@ -23,22 +23,14 @@ class Input extends React.Component {
   }
 
   render() {
-
-      const getInfo = this.state.name;
-      const referencement = getInfo.map((info, i) =>{
-	  	//console.log(info);
-          return (<div key={i}>
-            <input list="suggestions" placeholder="look for your favorite pokemon..."/>
-				<datalist>
-				    <option value={info.name}/>
-				</datalist>
-
-          </div>)
-        });
+        
 
     return (
         <div>
-          {referencement}
+          <input list="suggestions" placeholder="look for your favorite pokemon..."/>
+      <datalist>
+            <option value={this.state.name.name}>{this.state.name.name}</option>
+        </datalist>
         </div>
 
     );

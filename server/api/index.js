@@ -1,8 +1,6 @@
 'use strict';
 
-const users = require('./controllers/users');
 const ressources= require('./controllers/ressources');
-const suggestions= require('./controllers/suggestions');
 const bodyParser=require('body-parser');
 
 const { Router } = require('express');
@@ -13,27 +11,6 @@ const apiRoutes = new Router();
 apiRoutes.use(bodyParser.urlencoded({extended:false}));
 apiRoutes.use(bodyParser.json());
 
-//------------------users--------------------
-
-apiRoutes.post('/users', function (req,res) { //ou .get?
-	//methode de controller
-	return users.create(req,res);
-});
-
-apiRoutes.get('/users', function (req,res){
-	//methode de controller
-	return users.find(req,res);
-});
-
-apiRoutes.put('/users', function (req,res){
-
-	return users.update(req,res);
-});
-
-apiRoutes.delete('/users', function (req,res){
-
-	return users.delete(req,res);
-});
 
 //------------------Ressources--------------------
 
@@ -64,23 +41,10 @@ apiRoutes.delete('/ressources', function (req,res){
 	//methode de controller
 	return ressources.delete(req,res);
 });
-//----------------Suggestions--------------
 
-apiRoutes.post('/suggestions', function (req,res){ //ou .get?
-	//methode de controller
-	return suggestions.create(req,res);
-});
-
-apiRoutes.delete('/suggestions', function (req,res){
-	//methode de controller
-
-	return suggestions.delete(req,res);
-});
 
 // module.exports={
-// 	users:users,
 // 	ressources:ressources,
-//  suggestions:suggestions
 // };
 
 module.exports = apiRoutes;
